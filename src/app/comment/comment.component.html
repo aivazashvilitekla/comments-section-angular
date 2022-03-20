@@ -186,13 +186,18 @@
                   </div>
                 </ng-template>
               </div>
-              <div class="text" *ngIf="reply.user.username !== currentUser.username">
+              <div
+                class="text"
+                *ngIf="reply.user.username !== currentUser.username"
+              >
                 <p>
                   {{ reply.content }}
                 </p>
               </div>
-              <ng-container *ngIf="reply.user.username === currentUser.username">
-                <ng-container *ngIf="reply.id !==replyId">
+              <ng-container
+                *ngIf="reply.user.username === currentUser.username"
+              >
+                <ng-container *ngIf="reply.id !== replyId">
                   <div class="text">
                     <p>
                       {{ reply.content }}
@@ -205,11 +210,17 @@
                       {{ reply.content }}
                     </p>
                   </div>
-                  <ng-container *ngIf="editing ">
+                  <ng-container *ngIf="editing">
                     <textarea #newComment>{{ reply.content }}</textarea>
                     <button
                       class="btn btn-primary"
-                      (click)="updateCommentHandler(reply.id, newComment.value, mainCommentIndex)"
+                      (click)="
+                        updateCommentHandler(
+                          reply.id,
+                          newComment.value,
+                          mainCommentIndex
+                        )
+                      "
                     >
                       Save
                     </button>

@@ -11,7 +11,6 @@ import { Data, StorageService, Comment } from './data.service';
 export class AppComponent {
   title = 'comments-section';
   constructor(private storageService: StorageService) {
-    storageService.setData();
   }
 
   emptyValue = false;
@@ -49,8 +48,6 @@ export class AppComponent {
         }
       });
     } else {
-      console.log(index);
-      console.log(this.data.comments[index]);
       this.data.comments[index].replies?.map((item) => {
         console.log(id);
         if (item.id === id) {
