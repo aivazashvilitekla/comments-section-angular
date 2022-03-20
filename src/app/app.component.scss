@@ -1,0 +1,28 @@
+
+#comments-section{
+    width: 50%;
+    margin: 0 auto;    
+}
+#add-comment{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    .error{
+      color: red;
+    }
+    .container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 5%;
+        box-sizing: border-box;
+        form {
+          width: 90%;
+          display: flex;
+          justify-content: space-between;
+          input {
+            width: 90%;
+          }
+        }
+      }
+}

@@ -1,0 +1,241 @@
+<div class="comment">
+  <div class="container">
+    <div
+      class="likes"
+      [ngClass]="{ center: comment.user.username === currentUser.username }"
+    >
+      <button
+        type="button"
+        class="plus"
+        (click)="increaseScoreHandler(comment.id)"
+        *ngIf="comment.user.username !== currentUser.username"
+      >
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+      <h4>{{ comment.score }}</h4>
+      <button
+        type="button"
+        class="minus"
+        (click)="decreaseScoreHandler(comment.id)"
+        *ngIf="comment.user.username !== currentUser.username"
+      >
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="text-container">
+      <div class="title">
+        <div
+          class="info"
+          *ngIf="
+            comment.user.username === currentUser.username;
+            else randomUser
+          "
+        >
+          <div class="avatar">
+            <img src="../assets/{{ currentUser.image.png }}" alt="avatar" />
+          </div>
+          <div class="name">{{ currentUser.username }}</div>
+          <div class="you">You</div>
+          <div class="date">{{ comment.createdAt }}</div>
+          <div class="delete">
+            <button
+              class="btn btn-danger"
+              (click)="deleteCommentHandler(comment.id)"
+            >
+              <i class="fa fa-trash" aria-hidden="true"></i>Delete
+            </button>
+          </div>
+          <div class="edit" *ngIf="!editing">
+            <button class="btn btn-info" (click)="editComment()">
+              <i class="fa fa-edit" aria-hidden="true"></i>Edit
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="text" *ngIf="comment.user.username !== currentUser.username">
+        <p>
+          {{ comment.content }}
+        </p>
+      </div>
+      <ng-container *ngIf="comment.user.username === currentUser.username">
+        <div class="text" *ngIf="!editing">
+          <p>
+            {{ comment.content }}
+          </p>
+        </div>
+        <ng-container *ngIf="editing">
+          <textarea #newComment>{{ comment.content }}</textarea>
+          <button
+            class="btn btn-primary"
+            (click)="updateCommentHandler(comment.id, newComment.value)"
+          >
+            Save
+          </button>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <ng-container *ngIf="replying">
+    <div class="newReply">
+      <div class="container">
+        <div class="avatar">
+          <img
+            id="newCommentAvatar"
+            src="../assets/{{ currentUser.image.png }}"
+            alt="avatar"
+          />
+        </div>
+        <form>
+          <input
+            type="text"
+            name="comment"
+            placeholder="Add a comment..."
+            #newCommentInput
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="
+              addNewReplyHandler(
+                comment.id,
+                newCommentInput.value,
+                mainCommentIndex
+              )
+            "
+          >
+            SEND
+          </button>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+  <div class="replies">
+    <ng-container *ngIf="comment.replies">
+      <ng-container *ngFor="let reply of comment.replies; let i = index">
+        <div class="comment replyComment">
+          <div class="container">
+            <div
+              class="likes"
+              [ngClass]="{
+                center: reply.user.username === currentUser.username
+              }"
+            >
+              <button
+                *ngIf="reply.user.username !== currentUser.username"
+                type="button"
+                class="plus"
+                (click)="increaseScoreHandler(reply.id, i)"
+              >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+              <h4>{{ reply.score }}</h4>
+              <button
+                type="button"
+                class="minus"
+                *ngIf="reply.user.username !== currentUser.username"
+              >
+                <i
+                  class="fa fa-minus"
+                  aria-hidden="true"
+                  (click)="decreaseScoreHandler(reply.id, i)"
+                ></i>
+              </button>
+            </div>
+            <div class="text-container">
+              <div class="title">
+                <div
+                  class="info"
+                  *ngIf="
+                    reply.user.username === currentUser.username;
+                    else randomUserReply
+                  "
+                >
+                  <div class="avatar">
+                    <img
+                      src="../../assets/{{ currentUser.image.png }}"
+                      alt="avatar"
+                    />
+                  </div>
+                  <div class="name">{{ currentUser.username }}</div>
+                  <div class="you">You</div>
+                  <div class="date">{{ comment.createdAt }}</div>
+                  <div class="delete">
+                    <button
+                      class="btn btn-danger"
+                      (click)="deleteCommentHandler(reply.id, mainCommentIndex)"
+                    >
+                      <i class="fa fa-trash" aria-hidden="true"></i>Delete
+                    </button>
+                  </div>
+                  <div class="edit">
+                    <button
+                      class="btn btn-info"
+                      (click)="editComment(reply.id, i)"
+                    >
+                      <i class="fa fa-edit" aria-hidden="true"></i>Edit
+                    </button>
+                  </div>
+                </div>
+                <ng-template #randomUserReply>
+                  <div class="info">
+                    <div class="avatar">
+                      <img src="../assets/{{ reply.user.image.png }}" alt="" />
+                    </div>
+                    <div class="name">{{ reply.user.username }}</div>
+                    <div class="date">{{ reply.createdAt }}</div>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="text" *ngIf="reply.user.username !== currentUser.username">
+                <p>
+                  {{ reply.content }}
+                </p>
+              </div>
+              <ng-container *ngIf="reply.user.username === currentUser.username">
+                <ng-container *ngIf="reply.id !==replyId">
+                  <div class="text">
+                    <p>
+                      {{ reply.content }}
+                    </p>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="reply.id === replyId">
+                  <div class="text" *ngIf="!editing">
+                    <p>
+                      {{ reply.content }}
+                    </p>
+                  </div>
+                  <ng-container *ngIf="editing ">
+                    <textarea #newComment>{{ reply.content }}</textarea>
+                    <button
+                      class="btn btn-primary"
+                      (click)="updateCommentHandler(reply.id, newComment.value, mainCommentIndex)"
+                    >
+                      Save
+                    </button>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Template -->
+<ng-template #randomUser>
+  <div class="info">
+    <div class="avatar">
+      <img src="../assets/{{ comment.user.image.png }}" alt="" />
+    </div>
+    <div class="name">{{ comment.user.username }}</div>
+    <div class="date">{{ comment.createdAt }}</div>
+  </div>
+  <div class="reply">
+    <button type="button" class="btn btn-primary" (click)="replyComment()">
+      <i class="fa fa-reply" aria-hidden="true"></i>Reply
+    </button>
+  </div>
+</ng-template>
