@@ -49,11 +49,12 @@ export class AppComponent {
         }
       });
     } else {
-      console.log(id);
+      console.log(index);
+      console.log(this.data.comments[index]);
       this.data.comments[index].replies?.map((item) => {
-        console.log(item);
-
+        console.log(id);
         if (item.id === id) {
+          console.log(item);
           item.score++;
         }
       });

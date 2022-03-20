@@ -124,7 +124,7 @@
                 *ngIf="reply.user.username !== currentUser.username"
                 type="button"
                 class="plus"
-                (click)="increaseScoreHandler(reply.id, i)"
+                (click)="increaseScoreHandler(reply.id, mainCommentIndex)"
               >
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </button>
@@ -137,7 +137,7 @@
                 <i
                   class="fa fa-minus"
                   aria-hidden="true"
-                  (click)="decreaseScoreHandler(reply.id, i)"
+                  (click)="decreaseScoreHandler(reply.id, mainCommentIndex)"
                 ></i>
               </button>
             </div>
