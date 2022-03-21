@@ -1,40 +1,43 @@
-<section id="comments-section">
-  <ng-container *ngFor="let comment of data.comments; let mainCommentIndex = index;">
-    <app-comment
-      [comment]="comment"
-      [mainCommentIndex]="mainCommentIndex"
-      [currentUser]="data.currentUser"
-      (plus)="increaseScore($event)"
-      (minus)="decreaseScore($event)"
-      (delete)="deleteComment($event)"
-      (update)="updateComment($event)"
-      (reply)="replyComment($event)"
-      
-    ></app-comment>
-  </ng-container>
-</section>
-<section id="add-comment">
-  <p *ngIf="emptyValue" class="error">Please fill out input field.</p>
-  <div class="container">
-    <div class="avatar">
-      <img src="../assets/{{ data.currentUser.image.png }}" alt="avatar" />
+<section class="comments">
+  <section id="comments-section">
+    <ng-container
+      *ngFor="let comment of data.comments; let mainCommentIndex = index"
+    >
+      <app-comment
+        [comment]="comment"
+        [mainCommentIndex]="mainCommentIndex"
+        [currentUser]="data.currentUser"
+        (plus)="increaseScore($event)"
+        (minus)="decreaseScore($event)"
+        (delete)="deleteComment($event)"
+        (update)="updateComment($event)"
+        (reply)="replyComment($event)"
+      ></app-comment>
+    </ng-container>
+  </section>
+  <section id="add-comment">
+    <p *ngIf="emptyValue" class="error">Please fill out input field.</p>
+    <div class="container">
+      <div class="avatar">
+        <img src="../assets/{{ data.currentUser.image.png }}" alt="avatar" />
+      </div>
+      <form>
+        <input
+          name="comment"
+          type="text"
+          placeholder="Add a comment..."
+          required
+          [(ngModel)]="newComment"
+        />
+        <button
+          type="button"
+          id="addComment"
+          class="btn btn-primary"
+          (click)="addNewComment()"
+        >
+          SEND
+        </button>
+      </form>
     </div>
-    <form>
-      <input
-        name="comment"
-        type="text"
-        placeholder="Add a comment..."
-        required
-        [(ngModel)]="newComment"
-      />
-      <button
-        type="button"
-        id="addComment"
-        class="btn btn-primary"
-        (click)="addNewComment()"
-      >
-        SEND
-      </button>
-    </form>
-  </div>
+  </section>
 </section>

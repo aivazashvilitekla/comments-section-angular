@@ -39,6 +39,9 @@ export class CommentComponent implements OnInit {
       this.ind = index;
     }
   }
+  closeEditing() {
+    this.editing = false;
+  }
   replyComment() {
     this.replying = true;
   }

@@ -38,15 +38,12 @@
           <div class="you">You</div>
           <div class="date">{{ comment.createdAt }}</div>
           <div class="delete">
-            <button
-              class="btn btn-danger"
-              (click)="deleteCommentHandler(comment.id)"
-            >
+            <button class="btn" (click)="deleteCommentHandler(comment.id)">
               <i class="fa fa-trash" aria-hidden="true"></i>Delete
             </button>
           </div>
           <div class="edit" *ngIf="!editing">
-            <button class="btn btn-info" (click)="editComment()">
+            <button class="btn" (click)="editComment()">
               <i class="fa fa-edit" aria-hidden="true"></i>Edit
             </button>
           </div>
@@ -70,6 +67,9 @@
             (click)="updateCommentHandler(comment.id, newComment.value)"
           >
             Save
+          </button>
+          <button class="close btn" (click)="closeEditing()">
+            <i class="fa fa-close"></i> Close
           </button>
         </ng-container>
       </ng-container>
@@ -161,17 +161,14 @@
                   <div class="date">{{ comment.createdAt }}</div>
                   <div class="delete">
                     <button
-                      class="btn btn-danger"
+                      class="btn"
                       (click)="deleteCommentHandler(reply.id, mainCommentIndex)"
                     >
                       <i class="fa fa-trash" aria-hidden="true"></i>Delete
                     </button>
                   </div>
-                  <div class="edit">
-                    <button
-                      class="btn btn-info"
-                      (click)="editComment(reply.id, i)"
-                    >
+                  <div class="edit" *ngIf="!editing">
+                    <button class="btn" (click)="editComment(reply.id, i)">
                       <i class="fa fa-edit" aria-hidden="true"></i>Edit
                     </button>
                   </div>
@@ -224,6 +221,9 @@
                     >
                       Save
                     </button>
+                    <button class="close btn" (click)="closeEditing()">
+                      <i class="fa fa-close"></i> Close
+                    </button>
                   </ng-container>
                 </ng-container>
               </ng-container>
@@ -245,7 +245,7 @@
     <div class="date">{{ comment.createdAt }}</div>
   </div>
   <div class="reply">
-    <button type="button" class="btn btn-primary" (click)="replyComment()">
+    <button type="button" class="btn" (click)="replyComment()">
       <i class="fa fa-reply" aria-hidden="true"></i>Reply
     </button>
   </div>

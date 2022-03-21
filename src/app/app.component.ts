@@ -10,8 +10,7 @@ import { Data, StorageService, Comment } from './data.service';
 })
 export class AppComponent {
   title = 'comments-section';
-  constructor(private storageService: StorageService) {
-  }
+  constructor(private storageService: StorageService) {}
 
   emptyValue = false;
   editing = false;
