@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Data, StorageService, Comment } from './data.service';
-// import jsonObject from './data/data.json';
 
 @Component({
   selector: 'app-root',
@@ -14,23 +13,20 @@ export class AppComponent {
 
   emptyValue = false;
   editing = false;
-
   data: Data = this.storageService.getData();
-  startingId = 100;
   newComment!: string;
-
   com: Comment | undefined;
 
   addNewComment() {
-    this.startingId++;
+    this.storageService.startingId++;
     if (!this.newComment) {
       this.emptyValue = true;
       return;
     }
     this.data.comments.push({
-      id: this.startingId,
+      id: this.storageService.startingId,
       content: this.newComment,
-      createdAt: 'now',
+      createdAt: `${new Date()}`,
       score: 0,
       user: this.data.currentUser,
       replies: [],
@@ -48,9 +44,7 @@ export class AppComponent {
       });
     } else {
       this.data.comments[index].replies?.map((item) => {
-        console.log(id);
         if (item.id === id) {
-          console.log(item);
           item.score++;
         }
       });
@@ -100,9 +94,9 @@ export class AppComponent {
     this.storageService.setNewData(this.data);
   }
   replyComment({ id, text, mainCommentIndex }: any) {
-    this.startingId++;
+    this.storageService.startingId++;
     this.data.comments[mainCommentIndex].replies?.push({
-      id: this.startingId,
+      id: this.storageService.startingId,
       content: text,
       createdAt: 'now',
       score: 0,

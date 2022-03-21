@@ -18,7 +18,7 @@
       padding: 1% 4%;
       box-sizing: border-box;
       border-radius: 10px;
-      h4{
+      h4 {
         font-weight: bold;
         color: blue;
       }
@@ -29,7 +29,7 @@
         color: rgb(190, 190, 190);
       }
     }
-    .center{
+    .center {
       justify-content: center;
     }
     .text-container {
@@ -53,40 +53,42 @@
             border-radius: 5px;
           }
         }
-        .date{
+        .date {
           font-size: small;
         }
-        .reply button, .delete button, .edit button{
+        .reply button,
+        .delete button,
+        .edit button {
           display: flex;
           align-items: center;
           gap: 7px;
           color: blue;
-          &:hover{
+          &:hover {
             background: blue;
             color: white;
           }
         }
-        .delete button{
+        .delete button {
           color: red;
-          &:hover{
+          &:hover {
             background: red;
             color: white;
           }
         }
-        .edit button{
+        .edit button {
           color: blue;
-          &:hover{
+          &:hover {
             background: blue;
             color: white;
           }
         }
       }
-      textarea{
+      textarea {
         resize: none;
         width: 100%;
         height: 50px;
       }
-      .close{
+      .close {
         margin-left: 10px;
       }
     }

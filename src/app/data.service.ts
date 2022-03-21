@@ -20,6 +20,7 @@ export interface User {
   username: string;
 }
 export class StorageService {
+  startingId: number = 100;
   constructor() {
     if (!localStorage.getItem('data')) {
       localStorage.setItem('data', JSON.stringify(jsonObject));

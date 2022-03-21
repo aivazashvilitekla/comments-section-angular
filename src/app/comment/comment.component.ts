@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Comment, User } from '../data.service';
+import moment from 'moment';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -32,6 +33,9 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  calculateTime(date: string) {
+    return moment(date).fromNow();
+  }
   editComment(id?: number, index?: number) {
     this.editing = true;
     if (id && index) {
@@ -45,7 +49,6 @@ export class CommentComponent implements OnInit {
   replyComment() {
     this.replying = true;
   }
-
   increaseScoreHandler(id: number, index?: number) {
     this.plus.emit({ id, index });
   }
@@ -53,7 +56,6 @@ export class CommentComponent implements OnInit {
     this.minus.emit({ id, index });
   }
   deleteCommentHandler(id: number, index?: number) {
-    console.log(id, index);
     this.delete.emit({ id, index });
   }
   updateCommentHandler(id: number, text: string, index?: number) {
