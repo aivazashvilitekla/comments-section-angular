@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Comment, User } from '../data.service';
-import moment from 'moment';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -33,9 +32,6 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  calculateTime(date: string) {
-    return moment(date).fromNow();
-  }
   editComment(id?: number, index?: number) {
     this.editing = true;
     if (id && index) {

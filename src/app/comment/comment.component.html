@@ -36,7 +36,7 @@
           </div>
           <div class="name">{{ currentUser.username }}</div>
           <div class="you">You</div>
-          <div class="date">{{ calculateTime(comment.createdAt) }}</div>
+          <div class="date">{{ comment.createdAt | formatDate }}</div>
           <div class="delete">
             <button class="btn" (click)="deleteCommentHandler(comment.id)">
               <i class="fa fa-trash" aria-hidden="true"></i>Delete
